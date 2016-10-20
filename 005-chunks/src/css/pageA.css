@@ -1,0 +1,4 @@
+@import 'import.css';
+body {
+    border: 2px solid red;
+}

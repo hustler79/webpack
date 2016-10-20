@@ -1,0 +1,24 @@
+https://github.com/shama/webpack-stream
+
+https://github.com/webpack/webpack-with-common-libs
+    wspomniane w http://webpack.github.io/docs/usage-with-gulp.html#example
+
+
+
+list of tutorials
+    http://webpack.github.io/docs/list-of-tutorials.html
+
+    obadać
+        https://github.com/manavsehgal/reactspeedcoding/blob/master/webpack.prod.config.js
+            z książki: https://www.amazon.co.uk/React-Speed-Coding-Webpack-Flexbox-ebook/dp/B01GLC0Z5K#reader_B01GLC0Z5K
+
+
+
+
+
+
+
+
+
+
+
