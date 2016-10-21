@@ -17,7 +17,8 @@ module.exports = {
     plugins: [
         new CommonsChunkPlugin({
             filename: "commons.js",
-            name: "commons"
+            name: "commons",
+            minChunks: 2
         }),
         // new webpack.SourceMapDevToolPlugin({
         //     filename: '[file].map',
@@ -52,7 +53,8 @@ module.exports = {
     module: {
         loaders: [
             // { test: /\.css$/, loader: "style!css" }
-            { test: /\.css$/, loader: "style-loader!css-loader" },
+            { test: /\.css$/, loader: "style!css" },
+            { test: /\.scss$/, loader: "style!css!sass" },
             {
                 test: /\.jsx$/,
                 loader: 'babel-loader',

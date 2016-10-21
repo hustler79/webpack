@@ -10,6 +10,7 @@
     "inline-source-map": "^0.6.2",
     "jquery": "^3.1.1",
     "json-loader": "^0.5.4",
+    "scss-loader": "^0.0.1",
     "source-map": "^0.5.6",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
@@ -22,7 +23,8 @@
     "webpack": "^1.13.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "wp": "webpack --display-reasons --display-modules --display-chunk",
+    "wpanalyse": "npm run wp --profile --json >> profile.json"
   },
   "author": "",
   "license": "ISC"
