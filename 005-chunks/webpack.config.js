@@ -2,6 +2,7 @@ var path = require("path");
 const webpack = require('webpack');
 
 var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChunkPlugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
     entry: {
@@ -33,6 +34,7 @@ module.exports = {
                 comments: false,
             },
         }),
+        new ExtractTextPlugin("[name].css")
     ],
     resolve: {
         extensions: ['', '.js', '.jsx'],
@@ -52,12 +54,23 @@ module.exports = {
     },
     module: {
         loaders: [
-            // { test: /\.css$/, loader: "style!css" }
-            { test: /\.css$/, loader: "style!css" },
-            { test: /\.scss$/, loader: "style!css!sass" },
+            {
+                test: /\.css$/,
+                loaders: [
+                    'style',
+                    'css?importLoaders=1',
+                    'postcss'
+                ]
+            },
+            {
+                test: /\.(scss|sass)$/,
+                // loader: "style!css!sass"
+                // include: [ path.join(__dirname, 'source/styles') ],
+                loader: ExtractTextPlugin.extract('style', ['css', 'postcss', 'sass']),
+            },
             {
                 test: /\.jsx$/,
-                loader: 'babel-loader',
+                loader: 'babel',
                 query: {
                     presets: ['es2015']
                 },
@@ -70,11 +83,15 @@ module.exports = {
                     path.join(__dirname, 'js')
                 ]
             },
-
-
-
-            { test: /\.json$/, loader: "json-loader" }
+            { test: /\.json$/, loader: "json" }
         ]
+    },
+    postcss: function () {
+        return [
+            require('postcss-smart-import')({ /* ...options */ }),
+            require('precss')({ /* ...options */ }),
+            require('autoprefixer')({ /* ...options */ })
+        ];
     },
 
         // http://cheng.logdown.com/posts/2016/03/25/679045
