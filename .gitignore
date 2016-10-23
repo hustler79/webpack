@@ -5,3 +5,6 @@ app.bundle.js
 /004-start-again/bundle.js
 /005-chunks/js/
 /005-chunks/dist/
+/web/dist/
+/react/.gulp-scss-cache/
+/public_html/dist/

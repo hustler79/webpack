@@ -5,3 +5,5 @@ var config = require("./lib/config.json");
 onlyfora("call from A");
 common();
 console.log(config);
+
+

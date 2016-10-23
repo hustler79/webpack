@@ -1,30 +1,38 @@
-var path = require("path");
-const webpack = require('webpack');
+const path      = require("path");
+const webpack   = require('webpack');
+const glob      = require("glob");
+const libs      = require("./webpack/libs");
 
 var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChunkPlugin");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+// var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+var env = libs.envlog();
+console.log(env);
 
 module.exports = {
-    entry: {
-        pageA: path.join(__dirname, ".", "src", "pageA"),
-        pageB: path.join(__dirname, ".", "src", "pageB.jsx")
-    },
+    entry: libs.entry(),
+    // entry: {
+    //     pageA: path.join(__dirname, ".", "src", "pageA.entry.js"),
+    //     pageB: path.join(__dirname, ".", "src", "pageB.entry.jsx")
+    // },
     output: {
-        path: path.join(__dirname, "dist"),
+        path: path.join(__dirname, "..", "web", "dist"),
         filename: "[name].bundle.js",
-        chunkFilename: "[id].chunk.js",
+        publicPath: "/publicPath/"
+        // chunkFilename: "[id].chunk.js",
         // sourceMapFilename: "[file].map"
     },
     plugins: [
         new CommonsChunkPlugin({
-            filename: "commons.js",
-            name: "commons",
+            filename: "commons.bundle.js",
+            name: "commons.bundle",
             minChunks: 2
         }),
         // new webpack.SourceMapDevToolPlugin({
         //     filename: '[file].map',
         //     // exclude: ['vendors.js']
         // }),
+    ].concat( (env === 'prod') ? [
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
             compress: {
@@ -34,8 +42,12 @@ module.exports = {
                 comments: false,
             },
         }),
-        new ExtractTextPlugin("[name].css")
-    ],
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        })
+    ] : []),
     resolve: {
         extensions: ['', '.js', '.jsx'],
         alias: {
@@ -47,7 +59,7 @@ module.exports = {
         }
     },
     cache: true,
-    debug: true,
+    // debug: true,
     stats: {
         colors: true,
         reasons: true
@@ -56,17 +68,11 @@ module.exports = {
         loaders: [
             {
                 test: /\.css$/,
-                loaders: [
-                    'style',
-                    'css?importLoaders=1',
-                    'postcss'
-                ]
+                loader: "style!css"
             },
             {
-                test: /\.(scss|sass)$/,
-                // loader: "style!css!sass"
-                // include: [ path.join(__dirname, 'source/styles') ],
-                loader: ExtractTextPlugin.extract('style', ['css', 'postcss', 'sass']),
+                test: /\.scss$/,
+                loader: "style!css?sourceMap!sass?errLogToConsole=true&outputStyle=compressed&sourceMap"
             },
             {
                 test: /\.jsx$/,
@@ -74,31 +80,24 @@ module.exports = {
                 query: {
                     presets: ['es2015']
                 },
-                include: [
-                    path.join(__dirname, '..'),
-                    __dirname
-                ],
+                // include: [
+                //     path.join(__dirname, '..'),
+                //     // __dirname
+                // ],
                 exclude: [
                     path.join(__dirname, 'node_modules'),
-                    path.join(__dirname, 'js')
+                    // path.join(__dirname, 'js')
                 ]
             },
             { test: /\.json$/, loader: "json" }
         ]
-    },
-    postcss: function () {
-        return [
-            require('postcss-smart-import')({ /* ...options */ }),
-            require('precss')({ /* ...options */ }),
-            require('autoprefixer')({ /* ...options */ })
-        ];
     },
 
         // http://cheng.logdown.com/posts/2016/03/25/679045
         // https://webpack.github.io/docs/configuration.html#devtool
 
         // off - [aby użyć tego trzeba zakomentować całą sekcję new webpack.SourceMapDevToolPlugin({ ]
-    devtool: 'source-map', // full source map (podobno wolne)
+    devtool: (env === 'dev') ? false : 'source-map', // full source map (podobno wolne)
     // devtool: "cheap-source-map", // nieczytelne
 
         // on - [te używamy z włączoną sekcją new webpack.SourceMapDevToolPlugin({ ]

@@ -4,14 +4,16 @@ http://webpack.github.io/docs/tutorials/getting-started/
 
 npm install -g yarn
 yarn install
-npm run wp
+
+npm run prod        -- production mode (don't uglify and don't generate sourcefiles)
+webpack             -- run without gulp (faster version of 'npm run prod'
+npm run dev         -- dev mode (uglify and generate sourcefiles)
+npm run info        -- more info
+npm run analyze     -- generate analyze file
+    https://webpack.github.io/analyse/
+    https://chrisbateman.github.io/webpack-visualizer/
 
 
-npm install - czasem trzeba uruchomić dwa razy (przynajmniej na windows)
-and run
-/bin/bash run.sh
-yarn add css-loader style-loader
-npm i style-loader css-loader --save
 
 node node_modules/webpack/bin/webpack.js  ./entry.js bundle.js --progress --colors
 # jest też watch ale gówniany na maksa
@@ -20,18 +22,13 @@ node node_modules/webpack/bin/webpack.js  ./entry.js bundle.js --progress --colo
 build react examples:
     http://moduscreate.com/optimizing-react-es6-webpack-production-build/
 
-analyzers:
-    https://webpack.github.io/analyse/
-    https://chrisbateman.github.io/webpack-visualizer/
 
 obczaić:
-    https://youtu.be/MzVFrIAwwS8?t=16m20s
-    https://youtu.be/MzVFrIAwwS8?t=26m16s istambul
-    https://youtu.be/MzVFrIAwwS8?t=27m18s env_prod
     webpack --watch --progress --config webpack.dev
     webpack --config webpack.prod
 
-    http://jonathancreamer.com/
+https://www.youtube.com/playlist?list=PLRk95HPmOM6PN-G1xyKj9q6ap_dc9Yckm
+
 
 
 
