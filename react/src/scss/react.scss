@@ -1,0 +1,45 @@
+
+#app {
+    border: 1px solid gray;
+}
+
+input[type="text"],
+textarea {
+    width: 400px;
+}
+
+form > div {
+    padding: 4px;
+}
+
+.relative {
+    position: relative;
+}
+
+img.gender {
+    position: absolute;
+    top: 14px;
+    left: 100px;
+}
+
+div.single {
+    position: absolute;
+    top: -2px;
+    left: 142px;
+    display: inline-block;
+}
+
+div.multiple {
+    position: absolute;
+    top: 14px;
+    left: 103px;
+    display: inline-block;
+}
+
+.icontrol {
+    .fake {
+        margin-right: 10px;
+        margin-left: 4px;
+        margin-bottom: -5px;
+    }
+}

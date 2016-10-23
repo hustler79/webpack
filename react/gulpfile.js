@@ -7,7 +7,6 @@ var path = require("path"),
     sourcemaps = require('gulp-sourcemaps')
 ;
 
-
 gulp.task("scss", function () {
 
     var cnf = {
@@ -23,8 +22,9 @@ gulp.task("scss", function () {
 
     var target = path.join(config.output.path, "scss");
 
-    return gulp.src(["src/scss/pageA.scss"])
-    // return gulp.src("src/scss/pageA.scss")
+    return gulp.src([
+        "src/scss/**/*.scss"
+    ])
         .pipe(sourcemaps.init())
         .pipe(sass(cnf).on('error', sass.logError))
         .pipe(sourcemaps.write('.', { // https://github.com/floridoo/gulp-sourcemaps#write-options
@@ -46,6 +46,8 @@ gulp.task('default', function() {
 gulp.task('prod', ['scss', 'default']);
 
 gulp.task('watch', ['default', 'scss'], function () {
+    gulp.watch(['../web/bundles/**/*{js,jsx,css,scss}'], ['default']);
+
     gulp.watch(['src/**/*{js,jsx,css,scss}'], ['default']);
     gulp.watch(['src/**/*{css,scss}'], ['scss']);
 });

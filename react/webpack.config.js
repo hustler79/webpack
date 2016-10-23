@@ -7,7 +7,6 @@ var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChu
 // var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var env = libs.envlog();
-console.log(env);
 
 module.exports = {
     entry: libs.entry(),
@@ -48,10 +47,25 @@ module.exports = {
             }
         })
     ] : []),
+    resolveLoader: {
+        modulesDirectories: [
+            "web_loaders", "web_modules", "node_loaders", "node_modules",
+
+            // Module not found: Error: Cannot resolve module 'babel' in D:\www\_machine\webpack\runtime\public_html\bundles\react
+            path.resolve('./node_modules')
+        ],
+        extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
+        packageMains: ["webpackLoader", "webLoader", "loader", "main"]
+    },
     resolve: {
         extensions: ['', '.js', '.jsx'],
         root: [
             path.resolve('../web/bundles'),
+            path.resolve('src'),
+        ],
+        modulesDirectories: [
+            // Module not found: Error: Cannot resolve module 'react' in D:\www\_machine\webpack\runtime\public_html\bundles\react
+            path.resolve('./node_modules')
         ],
         alias: {
             'log': path.join(__dirname, 'webpack', 'log'),
@@ -61,8 +75,13 @@ module.exports = {
             // 'actions': __dirname + '/src/actions/'
         }
     },
+    // externals: {
+    //     'prismjs': 'Prism',
+    //     'react': 'React',
+    //     'react-dom': 'ReactDOM'
+    // },
     cache: true,
-    // debug: true,
+    debug: true,
     stats: {
         colors: true,
         reasons: true
@@ -81,15 +100,26 @@ module.exports = {
                 test: /\.jsx$/,
                 loader: 'babel',
                 query: {
-                    presets: ['es2015']
+                    plugins: [
+                        require.resolve('babel-plugin-transform-decorators-legacy'),
+                    ],
+                    presets: [
+                        // Module build failed: Error: Couldn't find preset "es2015" relative to directory "D:\\www\\_machine\\webpack\\runtime\\public_html\\bundles\\react"
+                        path.resolve('./node_modules/babel-preset-es2015'),
+                        path.resolve('./node_modules/babel-preset-react'),
+                        path.resolve('./node_modules/babel-preset-stage-0'),
+                        // 'es2015',
+                        // 'react'
+                    ]
                 },
                 // include: [
-                //     path.join(__dirname, '..'),
+                //     path.resolve(__dirname, '.'),
+                //     path.resolve(__dirname, 'node_modules'),
                 //     // __dirname
                 // ],
                 exclude: [
                     path.join(__dirname, 'node_modules'),
-                    // path.join(__dirname, 'js')
+                //     // path.join(__dirname, 'js')
                 ]
             },
             {

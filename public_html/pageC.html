@@ -7,33 +7,19 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Page A</title>
         <style>
-            #parent {
-                display: inline-block;
-                border: 1px solid gray;
-                padding: 10px;
-            }
-            #test {
-                display: inline-block;
-                width: 100px;
-                height: 100px;
-            }
         </style>
 
         <!-- only for test vvv -->
-            <link rel="stylesheet" href="/dist/scss/pageA.css">
+            <link rel="stylesheet" href="/dist/scss/react.css">
         <!-- only for test ^^^ -->
     </head>
     <body>
         Page B
-        <a href="/pageA.html">Go back</a>
-        <br>
-        <div id="parent">
-            <div id="test"></div>
-        </div>
-        <br>
-        <pre></pre>
-        <button id="error">error</button>
+        <a href="/pageA.html">Go to A</a>
+
+        <div id="app"></div>
+
         <script src="/dist/commons.bundle.js" charset="utf-8"></script>
-        <script src="/dist/pageB.bundle.js" charset="utf-8"></script>
+        <script src="/dist/pageC.bundle.js" charset="utf-8"></script>
     </body>
 </html>
