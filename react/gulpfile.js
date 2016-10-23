@@ -3,27 +3,36 @@ var path = require("path"),
     webpack = require('webpack-stream'),
     sass = require('gulp-sass'),
     config = require('./webpack.config'),
-    libs = require("./webpack/libs")
+    libs = require("./webpack/libs"),
+    sourcemaps = require('gulp-sourcemaps')
 ;
 
 
 gulp.task("scss", function () {
 
-    var cnf = {};
+    var cnf = {
+        outputStyle: 'compressed'
+    };
 
     if (libs.envlog() === 'prod') {
-      cnf = {
-            errLogToConsole: true,
-            outputStyle: 'compressed',
-            // sourceMapEmbed: true,
-            // sourceComments: true
-            // functions: sassFunctions()
-        }
+        cnf.errLogToConsole = true;
+        // sourceMapEmbed: true,
+        // sourceComments: true
+        // functions: sassFunctions()
     }
 
-    return gulp.src("src/scss/pageA.scss")
-        .pipe(sass(cnf))
-        .pipe(gulp.dest(path.join(config.output.path, "scss")))
+    var target = path.join(config.output.path, "scss");
+
+    return gulp.src(["src/scss/pageA.scss"])
+    // return gulp.src("src/scss/pageA.scss")
+        .pipe(sourcemaps.init())
+        .pipe(sass(cnf).on('error', sass.logError))
+        .pipe(sourcemaps.write('.', { // https://github.com/floridoo/gulp-sourcemaps#write-options
+            addComment: true,
+            debug: true,
+            identityMap: true,
+        }))
+        .pipe(gulp.dest(target))
     ;
 });
 

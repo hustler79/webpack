@@ -1,10 +1,10 @@
 /.idea
 node_modules
+/web
 .DS_Store
 app.bundle.js
 /004-start-again/bundle.js
 /005-chunks/js/
 /005-chunks/dist/
-/web/dist/
+/public_html/dist
 /react/.gulp-scss-cache/
-/public_html/dist/

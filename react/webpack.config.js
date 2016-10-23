@@ -50,6 +50,9 @@ module.exports = {
     ] : []),
     resolve: {
         extensions: ['', '.js', '.jsx'],
+        root: [
+            path.resolve('../web/bundles'),
+        ],
         alias: {
             // 'styles': __dirname + '/src/styles',
             // 'mixins': __dirname + '/src/mixins',

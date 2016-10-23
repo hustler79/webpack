@@ -6,7 +6,7 @@ var tmp;
 
 
 import "./css/pageB.css";
-import "./scss/pageA.scss";
+import "./scss/pageB.scss";
 
 // --- vvv
   import common from "./lib/common";
@@ -32,6 +32,12 @@ import "./scss/pageA.scss";
   document.querySelector('#error').addEventListener('click', function () {
       error();
   });
-
-
   // error();
+
+// --- vvv
+  import example from 'example/example';
+
+  log(example('call in pageB.js'));
+// --- ^^^
+
+
