@@ -4,7 +4,7 @@ const glob      = require("glob");
 const libs      = require("./webpack/libs");
 
 var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChunkPlugin");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+// var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var env = libs.envlog();
 console.log(env);
@@ -54,7 +54,7 @@ module.exports = {
             path.resolve('../web/bundles'),
         ],
         alias: {
-            // 'styles': __dirname + '/src/styles',
+            'log': path.join(__dirname, 'webpack', 'log'),
             // 'mixins': __dirname + '/src/mixins',
             // 'components': __dirname + '/src/components/',
             // 'stores': __dirname + '/src/stores/',
@@ -92,7 +92,10 @@ module.exports = {
                     // path.join(__dirname, 'js')
                 ]
             },
-            { test: /\.json$/, loader: "json" }
+            {
+                test: /\.json$/,
+                loader: "json"
+            }
         ]
     },
 

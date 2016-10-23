@@ -9,7 +9,7 @@ npm run prod        -- production mode (don't uglify and don't generate sourcefi
 webpack             -- run without gulp (faster version of 'npm run prod'
 npm run dev         -- dev mode (uglify and generate sourcefiles)
 npm run info        -- more info
-npm run analyze     -- generate analyze file
+npm run profile     -- generate profile file
     https://webpack.github.io/analyse/
     https://chrisbateman.github.io/webpack-visualizer/
 

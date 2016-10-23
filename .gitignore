@@ -8,3 +8,4 @@ app.bundle.js
 /005-chunks/dist/
 /public_html/dist
 /react/.gulp-scss-cache/
+/react/profile.json

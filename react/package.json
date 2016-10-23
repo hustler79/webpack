@@ -5,16 +5,15 @@
     "babel-polyfill": "^6.16.0",
     "colors": "^1.1.2",
     "css-loader": "^0.25.0",
-    "extract-text-webpack-plugin": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^2.1.1",
     "jquery": "^3.1.1",
     "json-loader": "^0.5.4",
     "node-sass": "^3.10.1",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
     "sass-loader": "^4.0.2",
-    "scss-loader": "^0.0.1",
-    "source-map": "^0.5.6",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
     "webpack-stream": "^3.2.0"
@@ -30,7 +29,7 @@
     "dev": "node node_modules/gulp/bin/gulp.js watch",
     "scss": "node node_modules/gulp/bin/gulp.js scss",
     "info": "webpack --display-reasons --display-modules --display-chunk --progress",
-    "analyze": "npm run info --profile --json >> profile.json"
+    "profile": "npm run info --profile --json >> profile.json"
   },
   "author": "",
   "license": "ISC"
