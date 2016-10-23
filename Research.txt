@@ -1,24 +1,7 @@
-https://github.com/shama/webpack-stream
+https://github.com/survivejs
+https://github.com/ProjectSeptemberInc/gl-react
+https://www.google.co.uk/search?q=react+blessed&ie=utf-8&oe=utf-8&client=firefox-b&gfe_rd=cr&ei=0tQMWLOGN-TR8gfb3oH4Cw
 
-https://github.com/webpack/webpack-with-common-libs
-    wspomniane w http://webpack.github.io/docs/usage-with-gulp.html#example
-
-
-
-list of tutorials
-    http://webpack.github.io/docs/list-of-tutorials.html
-
-    obadać
-        https://github.com/manavsehgal/reactspeedcoding/blob/master/webpack.prod.config.js
-            z książki: https://www.amazon.co.uk/React-Speed-Coding-Webpack-Flexbox-ebook/dp/B01GLC0Z5K#reader_B01GLC0Z5K
-
-
-
-
-
-
-
-
-
-
-
+es6 features:
+    http://es6-features.org/#Constants
+    https://github.com/lukehoban/es6features

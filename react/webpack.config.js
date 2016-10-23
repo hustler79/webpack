@@ -4,7 +4,7 @@ const glob      = require("glob");
 const libs      = require("./webpack/libs");
 
 var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChunkPlugin");
-// var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var env = libs.envlog();
 console.log(env);

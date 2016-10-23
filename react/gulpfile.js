@@ -1,6 +1,6 @@
 var path = require("path"),
     gulp = require('gulp'),
-    webpack = require('webpack-stream'),
+    webpack = require('webpack-stream'), // https://github.com/shama/webpack-stream
     sass = require('gulp-sass'),
     config = require('./webpack.config'),
     libs = require("./webpack/libs"),
