@@ -82,7 +82,7 @@ export default class App extends React.Component {
             });
         });
     }
-    @autobind
+    // @autobind
     render() {
 
         log(this.state);
