@@ -27,6 +27,7 @@ module.exports = {
             name: "commons.bundle",
             minChunks: 2
         }),
+        // https://webpack.github.io/docs/list-of-plugins.html#provideplugin
         new webpack.ProvidePlugin(utils.con('provide'))
         // new webpack.SourceMapDevToolPlugin({
         //     filename: '[file].map',
