@@ -3,9 +3,11 @@ var path = require("path"),
     webpack = require('webpack-stream'), // https://github.com/shama/webpack-stream
     sass = require('gulp-sass'),
     config = require('./webpack.config'),
-    libs = require("./webpack/libs"),
+    utils = require("./webpack/utils"),
     sourcemaps = require('gulp-sourcemaps')
 ;
+
+var env = utils.setup(path.resolve('./config.js'));
 
 gulp.task("scss", function () {
 
@@ -13,7 +15,7 @@ gulp.task("scss", function () {
         outputStyle: 'compressed'
     };
 
-    if (libs.envlog() === 'prod') {
+    if (utils.env() === 'prod') {
         cnf.errLogToConsole = true;
         // sourceMapEmbed: true,
         // sourceComments: true

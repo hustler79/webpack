@@ -1,21 +1,21 @@
 const path      = require("path");
 const webpack   = require('webpack');
 const glob      = require("glob");
-const libs      = require("./webpack/libs");
+const utils     = require("./webpack/utils");
 
 var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChunkPlugin");
 // var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var env = libs.envlog();
+var env = utils.setup(path.resolve('./config.js'));
 
 module.exports = {
-    entry: libs.entry(),
+    entry: utils.entry(utils.con('entrydir')),
     // entry: {
     //     pageA: path.join(__dirname, ".", "src", "pageA.entry.js"),
     //     pageB: path.join(__dirname, ".", "src", "pageB.entry.jsx")
     // },
     output: {
-        path: path.join(__dirname, "..", "web", "dist"),
+        path: utils.con('output'),
         filename: "[name].bundle.js",
         publicPath: "/publicPath/"
         // chunkFilename: "[id].chunk.js",
@@ -27,6 +27,7 @@ module.exports = {
             name: "commons.bundle",
             minChunks: 2
         }),
+        new webpack.ProvidePlugin(utils.con('provide'))
         // new webpack.SourceMapDevToolPlugin({
         //     filename: '[file].map',
         //     // exclude: ['vendors.js']
@@ -54,28 +55,25 @@ module.exports = {
             // Module not found: Error: Cannot resolve module 'babel' in D:\www\_machine\webpack\runtime\public_html\bundles\react
             path.resolve('./node_modules')
         ],
-        extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
-        packageMains: ["webpackLoader", "webLoader", "loader", "main"]
+        // extensions: ["", ".webpack-loader.js", ".web-loader.js", ".loader.js", ".js"],
+        // packageMains: ["webpackLoader", "webLoader", "loader", "main"]
     },
     resolve: {
         extensions: ['', '.js', '.jsx'],
-        root: [
-            // Module not found: Error: Cannot resolve module 'example/example' in /Volumes/tc/vagrant/webpack/runtime/react/src
-            path.resolve('../public_html/bundles'),
-            path.resolve('../web/bundles'),
-            path.resolve('src'),
-        ],
+        // Module not found: Error: Cannot resolve module 'example/example' in /Volumes/tc/vagrant/webpack/runtime/react/src
+        root: utils.con('resolveroot'),
         modulesDirectories: [
             // Module not found: Error: Cannot resolve module 'react' in D:\www\_machine\webpack\runtime\public_html\bundles\react
             path.resolve('./node_modules')
         ],
-        alias: {
-            'log': path.join(__dirname, 'webpack', 'log'),
-            // 'mixins': __dirname + '/src/mixins',
-            // 'components': __dirname + '/src/components/',
-            // 'stores': __dirname + '/src/stores/',
-            // 'actions': __dirname + '/src/actions/'
-        }
+        // alias: {
+        //     'log': path.join(__dirname, 'webpack', 'log'),
+        //     // 'mixins': __dirname + '/src/mixins',
+        //     // 'components': __dirname + '/src/components/',
+        //     // 'stores': __dirname + '/src/stores/',
+        //     // 'actions': __dirname + '/src/actions/'
+        // }
+        alias: utils.con('alias')
     },
     // externals: {
     //     'prismjs': 'Prism',

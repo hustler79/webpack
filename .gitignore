@@ -9,3 +9,4 @@ app.bundle.js
 /public_html/dist
 /react/.gulp-scss-cache/
 /react/profile.json
+*.log

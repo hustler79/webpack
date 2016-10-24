@@ -2,7 +2,11 @@
 
 import React from 'react';
 import ajax from 'lib/ajax';
-import log from 'log';
+
+// import log from 'log';
+
+log('log default baranie');
+
 import { autobind } from 'core-decorators';
 
 export default class App extends React.Component {
