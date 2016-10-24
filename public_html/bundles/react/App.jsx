@@ -17,7 +17,6 @@ export default class App extends React.Component {
             checkboxc: false,
             single: '',
             multiple: [],
-
             save: false
         }
     }
@@ -174,3 +173,5 @@ export default class App extends React.Component {
         );
     }
 }
+
+

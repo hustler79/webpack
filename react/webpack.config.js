@@ -60,6 +60,8 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx'],
         root: [
+            // Module not found: Error: Cannot resolve module 'example/example' in /Volumes/tc/vagrant/webpack/runtime/react/src
+            path.resolve('../public_html/bundles'),
             path.resolve('../web/bundles'),
             path.resolve('src'),
         ],

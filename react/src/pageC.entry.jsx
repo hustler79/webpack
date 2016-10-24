@@ -32,4 +32,4 @@ import App from 'react/App';
 // // }
 //
 //
-ReactDOM.render(<App url="db.php"/>, document.getElementById('app'));
+render(<App url="db.php"/>, document.getElementById('app'));
