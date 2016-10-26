@@ -1,5 +1,9 @@
 const path      = require("path");
 
+var alias = {
+    'log': path.join(__dirname, 'webpack', 'log'),
+};
+
 module.exports = {
     resolveroot: [ // where to search by require
         path.resolve('../public_html/bundles'),
@@ -9,9 +13,7 @@ module.exports = {
     entrydir: path.resolve('./src'), // looks for *.entry.js
     outputjs: path.join(__dirname, "..", "web", "js"),
     outputcss: path.join(__dirname, "..", "web", "css"),
-    alias: {
-      'log': path.join(__dirname, 'webpack', 'log'),
-    },
+    alias: alias,
     provide: {
         log: 'log'
     }

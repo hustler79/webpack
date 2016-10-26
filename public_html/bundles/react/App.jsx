@@ -16,6 +16,7 @@ export default class App extends React.Component {
             radio: 'female',
             checkbox: false,
             checkboxcomponent: false,
+            withoutcheckbox: false,
             single: '',
             multiple: [],
             save: false
@@ -41,6 +42,13 @@ export default class App extends React.Component {
     onChangeCheckbox(e) {
         log('onChangeCheckbox')
         this.setState({checkbox: e.target.checked});
+    }
+    @autobind
+    onChangeWithoutCheckbox(e) {
+        log('onChangeWithoutCheckbox')
+        this.setState((prevState, props) => ({
+            withoutcheckbox: !prevState.withoutcheckbox
+        }));
     }
     @autobind
     onChangeComponent(e) {
@@ -124,6 +132,13 @@ export default class App extends React.Component {
                         <input type="checkbox"
                                checked={this.state.checkbox}
                                onChange={this.onChangeCheckbox} /> checkbox raw
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <span style={{border: '1px gray solid'}}
+                            onClick={this.onChangeWithoutCheckbox}
+                        >{this.state.withoutcheckbox ? 'On' : 'Off'}</span> without checkbox
                     </label>
                 </div>
                 <div>
