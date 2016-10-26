@@ -1,8 +1,16 @@
 const path      = require("path");
+const utils     = require("./webpack/utils");
+
+var env = utils.setup();
 
 var alias = {
     'log': path.join(__dirname, 'webpack', 'log'),
 };
+
+if (env === 'prod') {
+    alias['react'] = 'react-lite';
+    alias['react-dom'] = 'react-lite';
+}
 
 module.exports = {
     resolveroot: [ // where to search by require

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ajax from 'lib/ajax';
-import Icheckbox from 'react/Icheckbox';
+import Icheckbox from 'app/Icheckbox';
 
 import { autobind } from 'core-decorators';
 
