@@ -16,7 +16,10 @@ module.exports = {
     },
     entry: function (root) {
         if (!root) {
-            throw "First specify root path for entry";
+            root = this.con('entrydir');
+            if (!root) {
+                throw "First specify root path for entry";
+            }
         }
         // https://github.com/dylansmith/node-pathinfo/blob/master/index.js
         // http://php.net/manual/en/function.pathinfo.php#refsect1-function.pathinfo-examples

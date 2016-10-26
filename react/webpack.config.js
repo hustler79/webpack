@@ -9,7 +9,7 @@ var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChu
 var env = utils.setup(path.resolve('./config.js'));
 
 module.exports = {
-    entry: utils.entry(utils.con('entrydir')),
+    entry: utils.entry(),
     // entry: {
     //     pageA: path.join(__dirname, ".", "src", "pageA.entry.js"),
     //     pageB: path.join(__dirname, ".", "src", "pageB.entry.jsx")
