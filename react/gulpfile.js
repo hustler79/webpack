@@ -22,8 +22,6 @@ gulp.task("scss", function () {
         // functions: sassFunctions()
     }
 
-    var target = path.join(config.output.path, "scss");
-
     return gulp.src([
         "src/scss/**/*.scss"
     ])
@@ -34,7 +32,7 @@ gulp.task("scss", function () {
             debug: true,
             identityMap: true,
         }))
-        .pipe(gulp.dest(target))
+        .pipe(gulp.dest(utils.con('outputcss')))
     ;
 });
 

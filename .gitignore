@@ -10,3 +10,6 @@ app.bundle.js
 /react/.gulp-scss-cache/
 /react/profile.json
 *.log
+npm-debug.log
+/public_html/js/
+/public_html/css/

@@ -15,7 +15,7 @@ module.exports = {
     //     pageB: path.join(__dirname, ".", "src", "pageB.entry.jsx")
     // },
     output: {
-        path: utils.con('output'),
+        path: utils.con('outputjs'),
         filename: "[name].bundle.js",
         publicPath: "/publicPath/"
         // chunkFilename: "[id].chunk.js",

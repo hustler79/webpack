@@ -7,7 +7,8 @@ module.exports = {
         path.resolve('src')
     ],
     entrydir: path.resolve('./src'), // looks for *.entry.js
-    output: path.join(__dirname, "..", "web", "dist"),
+    outputjs: path.join(__dirname, "..", "web", "js"),
+    outputcss: path.join(__dirname, "..", "web", "css"),
     alias: {
       'log': path.join(__dirname, 'webpack', 'log'),
     },
