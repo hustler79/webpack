@@ -7,4 +7,4 @@ export default ((() => {
     catch(e) {
         return () => {}
     }
-})());2
+})());

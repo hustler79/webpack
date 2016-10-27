@@ -15,7 +15,7 @@ module.exports = {
     //     pageB: path.join(__dirname, ".", "src", "pageB.entry.jsx")
     // },
     output: {
-        path: utils.con('output'),
+        path: utils.con('outputjs'),
         filename: "[name].bundle.js",
         publicPath: "/publicPath/"
         // chunkFilename: "[id].chunk.js",
@@ -91,11 +91,11 @@ module.exports = {
         loaders: [
             {
                 test: /\.css$/,
-                loader: "style!css"
+                loader: "style!css?importLoaders=1"
             },
             {
                 test: /\.scss$/,
-                loader: "style!css?sourceMap!sass?errLogToConsole=true&outputStyle=compressed&sourceMap"
+                loader: "style!css?importLoaders=1&sourceMap!sass?errLogToConsole=true&outputStyle=compressed&sourceMap"
             },
             {
                 test: /\.jsx$/,

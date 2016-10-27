@@ -2,10 +2,7 @@
 
 import React from 'react';
 import ajax from 'lib/ajax';
-
-// import log from 'log';
-
-log('log default baranie');
+import Icheckbox from 'app/Icheckbox';
 
 import { autobind } from 'core-decorators';
 
@@ -18,7 +15,8 @@ export default class App extends React.Component {
             description: 'default',
             radio: 'female',
             checkbox: false,
-            checkboxc: false,
+            checkboxcomponent: false,
+            withoutcheckbox: false,
             single: '',
             multiple: [],
             save: false
@@ -42,11 +40,20 @@ export default class App extends React.Component {
     }
     @autobind
     onChangeCheckbox(e) {
+        log('onChangeCheckbox')
         this.setState({checkbox: e.target.checked});
     }
     @autobind
+    onChangeWithoutCheckbox(e) {
+        log('onChangeWithoutCheckbox')
+        this.setState((prevState, props) => ({
+            withoutcheckbox: !prevState.withoutcheckbox
+        }));
+    }
+    @autobind
     onChangeComponent(e) {
-        this.setState({checkboxc: e.target.checked});
+        log('onChangeComponent')
+        this.setState({checkboxcomponent: e.target.checked});
     }
     @autobind
     onChangeRadio(e) {
@@ -89,7 +96,7 @@ export default class App extends React.Component {
     // @autobind
     render() {
 
-        log(this.state);
+        log('render', this.state);
 
         return (
             <form onSubmit={this.onSubmit}>
@@ -121,24 +128,36 @@ export default class App extends React.Component {
                     </label>
                 </div>
                 <div>
-                    <label htmlFor="checkbox">
-                        <input type="checkbox" id="checkbox"
+                    <label>
+                        <input type="checkbox"
                                checked={this.state.checkbox}
-                               onChange={this.onChangeCheckbox} /> checkbox
+                               onChange={this.onChangeCheckbox} /> checkbox raw
                     </label>
                 </div>
                 <div>
-                    {/*<Icheckbox onChange={this.onChangeComponent} checked={this.state.checkboxc}/>*/}
+                    <label>
+                        <span style={{border: '1px gray solid'}}
+                            onClick={this.onChangeWithoutCheckbox}
+                        >{this.state.withoutcheckbox ? 'On' : 'Off'}</span> without checkbox
+                    </label>
                 </div>
                 <div>
-                    <label htmlFor="checkboxc" className="icontrol">
-                        <input id="twodis" name="checkboxc" type="checkbox"
-                               checked={this.state.checkboxc}
-                               onChange={this.onChangeComponent}
+                    <label className="icontrol">
+                        <input type="checkbox"
+                               checked={this.state.checkbox}
+                               onChange={this.onChangeCheckbox}
                         />
                         <span className="fake"></span>
-                        checked component
+                        checked css
                     </label>
+                </div>
+                <div>
+                    <Icheckbox
+                        label="checkbox component"
+                        onChange={this.onChangeComponent}
+                        checked={this.state.checkboxcomponent}
+                        data-test="anoter attribute"
+                    />
                 </div>
                 <div className="relative">
                     <label htmlFor="single">
