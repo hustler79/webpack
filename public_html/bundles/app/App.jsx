@@ -50,9 +50,9 @@ export default class App extends React.Component {
             withoutcheckbox: !prevState.withoutcheckbox
         }));
     }
-    @autobind
+    // @autobind
     onChangeComponent(e) {
-        log('onChangeComponent')
+        log('onChangeComponent not bound')
         this.setState({checkboxcomponent: e.target.checked});
     }
     @autobind
@@ -129,6 +129,7 @@ export default class App extends React.Component {
                 </div>
                 <div>
                     <label>
+
                         <input type="checkbox"
                                checked={this.state.checkbox}
                                onChange={this.onChangeCheckbox} /> checkbox raw
@@ -154,7 +155,7 @@ export default class App extends React.Component {
                 <div>
                     <Icheckbox
                         label="checkbox component"
-                        onChange={this.onChangeComponent}
+                        onChange={(e) => this.onChangeComponent(e)}
                         checked={this.state.checkboxcomponent}
                         data-test="anoter attribute"
                     />

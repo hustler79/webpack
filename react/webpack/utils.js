@@ -2,6 +2,28 @@ var glob      = require("glob");
 var path      = require("path");
 var colors    = require('colors');
 
+function findentries(root) {
+    // https://github.com/dylansmith/node-pathinfo/blob/master/index.js
+    // http://php.net/manual/en/function.pathinfo.php#refsect1-function.pathinfo-examples
+
+    var list = glob.sync(root+'/**/*.entry.{js,jsx}');
+
+    var t, tmp = {};
+
+    for (var i = 0, l = list.length ; i < l ; i += 1 ) {
+
+        t = list[i];
+
+        t = path.basename(t, path.extname(t));
+
+        t = path.basename(t, path.extname(t));
+
+        tmp[t] = list[i];
+    }
+
+    return tmp;
+}
+
 module.exports = {
     config: false,
     setup: function (setup) {
@@ -11,26 +33,39 @@ module.exports = {
         }
 
         var env = this.env();
+
         console.log('env: '.yellow + env.red + "\n");
+
         return env;
     },
-    entry: function (root) {
+    entry: function () {
+
+        var root = this.con('entryjs');
+
         if (!root) {
-            root = this.con('entrydir');
-            if (!root) {
-                throw "First specify root path for entry";
+            throw "First specify root path for entry";
+        }
+
+        if (Object.prototype.toString.call( root ) !== '[object Array]') {
+            root = [root];
+        }
+
+        var t, i, tmp = {};
+
+        root.forEach(function (r) {
+
+            t = findentries(r);
+
+            for (i in t) {
+
+                if (tmp[i]) {
+                    throw "Entry file key '"+i+"' generated from file '"+t[i]+"' exist";
+                }
+
+                tmp[i] = t[i];
             }
-        }
-        // https://github.com/dylansmith/node-pathinfo/blob/master/index.js
-        // http://php.net/manual/en/function.pathinfo.php#refsect1-function.pathinfo-examples
-        var list = glob.sync(root+'/**/*.entry.{js,jsx}');
-        var t, tmp = {};
-        for (var i = 0, l = list.length ; i < l ; i += 1 ) {
-            t = list[i];
-            t = path.basename(t, path.extname(t));
-            t = path.basename(t, path.extname(t));
-            tmp[t] = list[i];
-        }
+        });
+
         return tmp;
     },
     env: function () {
@@ -59,6 +94,11 @@ module.exports = {
         }
 
         if (key) {
+
+            if ( ! this.config[key]) {
+                throw "Config has not setting under key '"+key+"'";
+            }
+
             return this.config[key];
         }
 

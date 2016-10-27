@@ -21,10 +21,8 @@ gulp.task("scss", function () {
         // sourceComments: true
         // functions: sassFunctions()
     }
-
-    return gulp.src([
-        "src/scss/**/*.scss"
-    ])
+    
+    return gulp.src(utils.con('entryscss'))
         .pipe(sourcemaps.init())
         .pipe(sass(cnf).on('error', sass.logError))
         .pipe(sourcemaps.write('.', { // https://github.com/floridoo/gulp-sourcemaps#write-options
@@ -45,10 +43,19 @@ gulp.task('default', function() {
 
 gulp.task('prod', ['scss', 'default']);
 
-gulp.task('watch', ['default', 'scss'], function () {
-    gulp.watch(['../web/bundles/**/*{js,jsx,css,scss}'], ['default']);
+gulp.task('watch', ['prod'], function () {
+    utils.con('resolveroot').forEach(function (p) {
+        gulp.watch([p + '/**/*.{js,jsx,css,scss}'], ['prod']);
+    });
 
-    gulp.watch(['src/**/*{js,jsx,css,scss}'], ['default']);
-    gulp.watch(['src/**/*{css,scss}'], ['scss']);
+    var entry = utils.con('entryjs');
+
+    if ( Object.prototype.toString.call( entry ) !== '[object Array]' ) {
+        entry = [entry];
+    }
+
+    entry.forEach(function (p) {
+        gulp.watch([p + '/**/*.entry.{js,jsx}'], ['prod']);
+    });
 });
 
