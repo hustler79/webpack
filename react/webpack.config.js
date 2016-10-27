@@ -8,6 +8,13 @@ var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChu
 
 var env = utils.setup(path.resolve('./config.js'));
 
+var alias = utils.con('alias');
+
+if (env === 'prod') {
+    alias['react']      = 'react-lite';
+    alias['react-dom']  = 'react-lite';
+}
+
 module.exports = {
     entry: utils.entry(),
     // entry: {
@@ -74,7 +81,7 @@ module.exports = {
         //     // 'stores': __dirname + '/src/stores/',
         //     // 'actions': __dirname + '/src/actions/'
         // }
-        alias: utils.con('alias')
+        alias: alias
     },
     // externals: {
     //     'prismjs': 'Prism',
