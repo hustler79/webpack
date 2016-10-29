@@ -5,3 +5,7 @@ https://www.google.co.uk/search?q=react+blessed&ie=utf-8&oe=utf-8&client=firefox
 es6 features:
     http://es6-features.org/#Constants
     https://github.com/lukehoban/es6features
+
+further research:
+    https://github.com/facebook/fbjs
+    https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript/ECMAScript_6_support_in_Mozilla

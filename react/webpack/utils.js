@@ -59,7 +59,7 @@ module.exports = {
             for (i in t) {
 
                 if (tmp[i]) {
-                    throw "Entry file key '"+i+"' generated from file '"+t[i]+"' exist";
+                    throw "Entry file key '"+i+"' generated from file '"+t[i]+"' already exist";
                 }
 
                 tmp[i] = t[i];

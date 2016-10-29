@@ -1,6 +1,8 @@
 'use strict';
 
 import React from 'react';
+import CreateInstance from 'app/CreateInstance';
+log('CreateInstance', CreateInstance);
 
 export default class Icheckbox extends React.Component {
     static PropTypes = {

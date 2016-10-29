@@ -1,0 +1,13 @@
+{
+    "input": "-",
+    "description": "+00",
+    "radio": "male",
+    "checkbox": true,
+    "checkboxc": true,
+    "single": "banana",
+    "multiple": [
+        "apple",
+        "banana"
+    ],
+    "save": false
+}

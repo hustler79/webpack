@@ -4,10 +4,9 @@ node_modules
 *.log
 .DS_Store
 /web
-/004-start-again/bundle.js
-/005-chunks/js/
+/examples/webpack/004-start-again/bundle.js
+/examples/webpack/003-loaders/bin/
 /react/.gulp-scss-cache/
 /react/profile.json
 /public_html/js/
 /public_html/css/
-/003-loaders/bin/

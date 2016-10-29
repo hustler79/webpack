@@ -1,0 +1,47 @@
+Virtual DOM - server side rendering
+Server rendering
+Descriptive warnings
+Easy composition
+Still javascript - no addition template abstraction layer
+    no need to learn additional syntax that try to replicate functionalities that exists in native language
+
+    angular:
+        <select class="form-control"
+            ng-options="item as item.label for item in ctrl.types track by item.id"
+            data-ng-model="page.type"
+        ></select>
+
+    react:
+        <select value={selected_value_or_values_as_array} onChange={...}>
+            {ctrl.types.map(function (item) {
+                return <option value={item.id}>{item.label}</option>
+            })}
+        </select>
+
+        eq. filter:
+            <select value={selected_value_or_values_as_array}>
+                {ctrl.types.filter(function (it) {return it.id != 1}).map(function (item) {
+                    return <option value={item.id}>{item.label}</option>
+                })}
+            </select>
+
+        eq. change label:
+            <select value={selected_value_or_values_as_array}>
+                {ctrl.types.map(function (item) {
+                    return <option value={item.id}>{'item: ' + item.label}</option>
+                })}
+            </select>
+
+
+Callback as event delegations - https://davidwalsh.name/event-delegate
+Synthetic event system // https://facebook.github.io/react/docs/working-with-the-browser.html
+
+
+Community:
+    https://github.com/facebook/react/wiki/Complementary-Tools#jsx-integrations
+    https://react.rocks/ - search tools
+
+
+-- need to understand:
+http://gaearon.github.io/react-hot-loader/
+   other tools: https://github.com/facebook/react/wiki/Complementary-Tools#jsx-integrations

@@ -7,7 +7,15 @@ module.exports = {
     ],
     alias: {
         // 'log': path.join(__dirname, 'webpack', 'log'),
-        'log': path.resolve('./webpack/log'),
+        log     : path.resolve('./webpack/log'),
+
+        // https://facebook.github.io/react/docs/update.html g(Immutability Helpers)
+        // https://www.npmjs.com/package/immutability-helper
+        // https://github.com/seansfkelley/pure-render-decorator/commit/137f8a3c6999aba4688f81ad6c9f4b9f0a180de1
+        // fbjs/lib/shallowEqual.js somewhere in node_modules from repository 'facebook/fbjs'
+        // https://github.com/jurassix/react-immutable-render-mixin
+        update  : 'immutability-helper',
+        fb: 'fbjs/lib',
     },
     provide: {
         log: 'log'
