@@ -1,7 +1,7 @@
 const path      = require("path");
 
 module.exports = {
-    resolveroot: [ // where to search by require
+    roots: [ // where to search by require
         path.resolve('src'),
         path.resolve('../public_html/bundles')
     ],
@@ -21,16 +21,19 @@ module.exports = {
         log: 'log'
     },
 
-    entryjs: [ // looks for *.entry.{js|jsx} - watch only on files *.entry.{js|jsx}
-        path.resolve('./src'),
-        // ...
-    ],
-    outputjs: path.resolve("../public_html/js"),
 
-    // only this scss files will be transformed to css
-    entryscss: [
-        path.resolve('./src/scss/**/*.scss')
-        // ...
-    ],
-    outputcss: path.resolve("../public_html/css"),
+    js: {
+        entries: [ // looks for *.entry.{js|jsx} - watch only on files *.entry.{js|jsx}
+            path.resolve('./src'),
+            // ...
+        ],
+        output: path.resolve("../public_html/js")
+    },
+    scss: {
+        entries: [ // only this scss files will be transformed to css
+            path.resolve('./src/scss/**/*.scss')
+            // ...
+        ],
+        output: path.resolve("../public_html/css")
+    }
 }

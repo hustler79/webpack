@@ -40,7 +40,7 @@ module.exports = {
     },
     entry: function () {
 
-        var root = this.con('entryjs');
+        var root = this.con('js.entries');
 
         if (!root) {
             throw "First specify root path for entry";
@@ -87,22 +87,43 @@ module.exports = {
 
         return process.argv.indexOf('watch') > -1 ? 'dev' : 'prod';
     },
-    con: function (key) {
+    con: function (key, from) {
 
-        if (!this.config) {
-            return this.config = require(key);
+        if (!from) {
+
+            if (!this.config) {
+                throw "first call utils.setup()";
+            }
+
+            from = this.config;
         }
 
         if (key) {
 
-            if ( ! this.config[key]) {
+            key = key + '';
+
+            if (key.indexOf('.') > -1) {
+                var tkey, keys = key.split('.');
+                try {
+                    while (tkey = keys.shift()) {
+                        from = this.con(tkey, from);
+                    }
+                }
+                catch (e) {
+                    throw "Can't find data under key: " + key;
+                }
+
+                return from;
+            }
+
+            if ( ! from[key]) {
                 throw "Config has not setting under key '"+key+"'";
             }
 
-            return this.config[key];
+            return from[key];
         }
 
-        return this.config;
+        return from;
     }
 };
 

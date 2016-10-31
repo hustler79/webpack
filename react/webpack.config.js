@@ -22,7 +22,7 @@ module.exports = {
     //     pageB: path.join(__dirname, ".", "src", "pageB.entry.jsx")
     // },
     output: {
-        path: utils.con('outputjs'),
+        path: utils.con('js.output'),
         filename: "[name].bundle.js",
         publicPath: "/publicPath/"
         // chunkFilename: "[id].chunk.js",
@@ -69,7 +69,7 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.jsx'],
         // Module not found: Error: Cannot resolve module 'example/example' in /Volumes/tc/vagrant/webpack/runtime/react/src
-        root: utils.con('resolveroot'),
+        root: utils.con('roots'),
         modulesDirectories: [
             // Module not found: Error: Cannot resolve module 'react' in D:\www\_machine\webpack\runtime\public_html\bundles\react
             path.resolve('./node_modules')
