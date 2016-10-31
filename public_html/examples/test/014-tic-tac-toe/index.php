@@ -82,23 +82,6 @@
 
         function log(l) {try {console.log(l);}catch (e) {}}
 
-        class ShoppingList extends React.Component {
-            render() {
-                return (
-                    <div className="shopping-list">
-                        <h1>Shopping List for {this.props.name}</h1>
-                        <ul>
-                            <li>Instagram</li>
-                            <li>WhatsApp</li>
-                            <li>Oculus</li>
-                        </ul>
-                    </div>
-                );
-            }
-        }
-        /**
-         * stateless functional components
-         */
         function Square(props) {
             return (
                 <button className="square" onClick={() => props.onClick()}>
@@ -108,50 +91,26 @@
         }
 
         class Board extends React.Component {
-            constructor() {
-                super();
-                this.state = {
-                    squares: Array(9).fill(null),
-                    xIsNext: true,
-                };
-            }
-            square(i) {
-                return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)}/>;
-            }
-            handleClick(i) {
-                // https://facebook.github.io/react/tutorial/tutorial.html#why-immutability-is-important
-                var s = this.state.squares.slice();
-                s[i] = this.state.xIsNext ? 'X' : 'O';
-                this.setState((state) => ({
-                    squares: s,
-                    xIsNext : !state.xIsNext
-                }));
+            renderSquare(i) {
+                return <Square value={this.props.squares[i]} onClick={() => this.props.onClick(i)} />;
             }
             render() {
-                const winner = calculateWinner(this.state.squares);
-                let status;
-                if (winner) {
-                    status = 'Winner: ' + winner;
-                } else {
-                    status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-                }
                 return (
                     <div>
-                        <div className="status">{status}</div>
                         <div className="board-row">
-                            {this.square(0)}
-                            {this.square(1)}
-                            {this.square(2)}
+                            {this.renderSquare(0)}
+                            {this.renderSquare(1)}
+                            {this.renderSquare(2)}
                         </div>
                         <div className="board-row">
-                            {this.square(3)}
-                            {this.square(4)}
-                            {this.square(5)}
+                            {this.renderSquare(3)}
+                            {this.renderSquare(4)}
+                            {this.renderSquare(5)}
                         </div>
                         <div className="board-row">
-                            {this.square(6)}
-                            {this.square(7)}
-                            {this.square(8)}
+                            {this.renderSquare(6)}
+                            {this.renderSquare(7)}
+                            {this.renderSquare(8)}
                         </div>
                     </div>
                 );
@@ -159,20 +118,77 @@
         }
 
         class Game extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    history: [Array(9).fill(null)],
+                    stepNumber: 0,
+                    xIsNext: true,
+                };
+            }
+            handleClick(i) {
+                var history = this.state.history.slice(0, this.state.stepNumber + 1);
+                var current = history[history.length - 1];
+                const squares = current.slice();
+                if (calculateWinner(squares) || squares[i]) {
+                    return;
+                }
+
+                squares[i] = this.state.xIsNext ? 'X' : 'O';
+
+                this.setState({
+                    history: history.concat([squares]),
+                    stepNumber: history.length,
+                    xIsNext: !this.state.xIsNext,
+                });
+            }
+            jumpTo(step) {
+                this.setState({
+                    stepNumber: step,
+                    xIsNext: (step % 2) ? false : true,
+                });
+            }
             render() {
+                const history = this.state.history;
+                const current = history[this.state.stepNumber];
+
+                const winner = calculateWinner(current);
+                let status;
+                if (winner) {
+                    status = 'Winner: ' + winner;
+                } else {
+                    status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+                }
+
+                const moves = history.map((step, move) => {
+                    const desc = move ?
+                    'Move #' + move :
+                        'Game start';
+                    return (
+                        <li key={move}>
+                            <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+                        </li>
+                    );
+                });
+
                 return (
                     <div className="game">
-                        <div className="game-board">
-                            <Board />
+                        <div>
+                            <Board
+                                squares={current}
+                                onClick={(i) => this.handleClick(i)}
+                            />
                         </div>
                         <div className="game-info">
-                            <div>{/* status */}</div>
-                            <ol>{/* TODO */}</ol>
+                            <div>{status}</div>
+                            <ol>{moves}</ol>
                         </div>
                     </div>
                 );
             }
         }
+
+        // ========================================
 
         ReactDOM.render(
             <Game />,
@@ -201,39 +217,8 @@
 
 
 
-        window.addEventListener('mousedown', function(e) {
-            document.body.classList.add('mouse-navigation');
-            document.body.classList.remove('kbd-navigation');
-        });
-        window.addEventListener('keydown', function(e) {
-            if (e.keyCode === 9) {
-                document.body.classList.add('kbd-navigation');
-                document.body.classList.remove('mouse-navigation');
-            }
-        });
-        window.addEventListener('click', function(e) {
-            if (e.target.tagName === 'A' && e.target.getAttribute('href') === '#') {
-                e.preventDefault();
-            }
-        });
-
-        window.onerror = function(message, source, line, col, error) {
-            var text = error ? error.stack || error : message + ' (at ' + source + ':' + line + ':' + col + ')';
-            errors.textContent += text + '\n';
-            errors.style.display = '';
-        };
-
-        console.error = (function(old) {
-            return function error() {
-                errors.textContent += Array.prototype.slice.call(arguments).join(' ') + '\n';
-                errors.style.display = '';
-                old.apply(this, arguments);
-            }
-        })(console.error);
-
-
-
     </script>
+    <br>
 
     <div id="errors"></div>
     <div id="container"></div>
