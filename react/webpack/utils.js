@@ -117,7 +117,7 @@ module.exports = {
             }
 
             if ( ! from[key]) {
-                throw "Config has not setting under key '"+key+"'";
+                throw "Can't find data under key: " + key;
             }
 
             return from[key];
