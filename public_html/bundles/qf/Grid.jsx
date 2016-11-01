@@ -7,8 +7,15 @@ export default class Grid extends React.Component {
     static PropTypes = {
         height: React.PropTypes.number.isRequired,
         width: React.PropTypes.number.isRequired,
+        radius: React.PropTypes.number.isRequired,
     };
     render() {
+
+        let
+            radius = this.props.radius,
+            mr = radius * 2
+        ;
+
         return (
             // https://developer.mozilla.org/en/docs/Web/SVG/Tutorial/Paths
 
@@ -23,12 +30,12 @@ export default class Grid extends React.Component {
             // </svg>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                viewBox="-10 -10 20 20"
+                viewBox={`-${radius} -${radius} ${mr} ${mr}`}
                 height={this.props.height}
                 width={this.props.width}
             >
-                <line x1="0" y1="-10" x2="0" y2="10" strokeWidth="1" stroke="gray"/>
-                <line x1="-10" y1="0" x2="10" y2="0" strokeWidth="1" stroke="gray"/>
+                <line x1="0" y1={`-${radius}`} x2="0" y2={radius} strokeWidth="1" stroke="gray"/>
+                <line x1={`-${radius}`} y1="0" x2={radius} y2="0" strokeWidth="1" stroke="gray"/>
                 {this.props.children}
             </svg>
         );

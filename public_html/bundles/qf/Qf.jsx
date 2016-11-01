@@ -8,30 +8,40 @@ import Grid from 'qf/Grid';
 import debounce from 'lodash/debounce';
 
 export default class Qf extends React.Component {
+    static PropTypes = {
+        radius: React.PropTypes.number.isRequired,
+        step: React.PropTypes.number.isRequired,
+        height: React.PropTypes.number.isRequired,
+        width: React.PropTypes.number.isRequired,
+    };
     constructor() {
         super()
         this.state = {
-            a: 0,
-            b: 0,
-            c: 0
+            a: 26,
+            b: 18,
+            c: -4
         };
+        this.setStateDebounced = debounce(this.setStateDebounced, 5);
     }
     @autobind
     onChangeRange(e) {
         const variable = e.target.parentNode.innerText.toLowerCase();
         let state = {};
         state[variable] = parseInt(e.target.value, 10);
+        this.setStateDebounced(state);
+    }
+    setStateDebounced(state) {
         this.setState(state);
     }
     render() {
-        var
+        let
             data = [],
             a_ = this.state.a / 100,
-            b_ = this.state.b / 100,
+            b_ = (this.state.b * 0.1).toFixed(2),
             c = this.state.c
         ;
 
-        for (var x = -10 ; x <= 10 ; x += 2 ) {
+        for (var x = -this.props.radius ; x <= this.props.radius ; x += this.props.step ) {
             data.push([x, Math.pow(x * a_, 2) + (x * b_) + c]);
         }
 
@@ -53,17 +63,17 @@ export default class Qf extends React.Component {
                         max={100}
                         onChange={this.onChangeRange}
                     />
-                    : {a_}
+                    : {a_} , {this.state.a}
                 </div>
                 <div>
                     <Range
                         label="B"
                         value={this.state.b}
-                        min={-10}
-                        max={10}
+                        min={-100}
+                        max={100}
                         onChange={this.onChangeRange}
                     />
-                    : {b_}
+                    : {b_} , {this.state.b}
                 </div>
                 <div>
                     <Range
@@ -77,17 +87,18 @@ export default class Qf extends React.Component {
                 </div>
                 <div>
                     <Grid
-                        width={200}
-                        height={200}
+                        width={this.props.width}
+                        height={this.props.height}
+                        radius={this.props.radius}
                     >
                         {list.map(function (d, i) {
                             return (
                                 <line
                                     key={i}
-                                    x1={d[0][0]}
-                                    y1={d[0][1]}
-                                    x2={d[1][0]}
-                                    y2={d[1][1]}
+                                    x1={d[0][0].toFixed(2) * 1}
+                                    y1={d[0][1].toFixed(2) * 1}
+                                    x2={d[1][0].toFixed(2) * 1}
+                                    y2={d[1][1].toFixed(2) * 1}
                                     strokeWidth="1"
                                     stroke="gray"
                                     fill="transparent"
