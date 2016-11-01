@@ -30,6 +30,36 @@
     <script>
         var log = (function () {try {return console.log;}catch (e) {return function () {};}}());
 
+        var rangeOnChange = {
+            bind: function (rng, callback) {
+                callback = callback.bind(rng)
+                var listener = function() {
+                    window.requestAnimationFrame(callback);
+                };
+                var events = {
+                    mousedown: function() {
+                        listener();
+                        rng.addEventListener("mousemove", listener);
+                    },
+                    mouseup: function() {
+                        rng.removeEventListener("mousemove", listener);
+                    },
+                    listener: listener
+                };
+
+                rng.addEventListener("mousedown", events.mousedown);
+                rng.addEventListener("mouseup", events.mouseup);
+
+                return events;
+            },
+            unbind: function (rng, events) {
+                rng.removeEventListener("mousedown", events.mousedown);
+                rng.removeEventListener("mouseup", events.mouseup);
+                rng.removeEventListener("mousemove", events.listener);
+                return this;
+            }
+        };
+
         document.addEventListener('DOMContentLoaded', function () {
             // http://codepen.io/stopsopa/pen/rrAmZJ
 
@@ -43,7 +73,7 @@
                 return ang * (Math.PI / 180);
             }
 
-            slider.addEventListener('change', function () {
+            rangeOnChange.bind(slider, function () {
                 var s = slider.value;
                 var width = (500 / 100) * s;
 
@@ -53,7 +83,7 @@
                 var height = Math.tan(angToRad(60)) * halfW;
 
                 tr.style.borderWidth = '0 '+halfW+'px '+height+'px '+halfW+'px';
-            });
+            })
 
         });
     </script>

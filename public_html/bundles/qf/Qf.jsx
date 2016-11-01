@@ -13,7 +13,11 @@ export default class Qf extends React.Component {
         step: React.PropTypes.number.isRequired,
         height: React.PropTypes.number.isRequired,
         width: React.PropTypes.number.isRequired,
+        // children: React.PropTypes.element.isRequired,
     };
+    // static defaultProps = {
+    //     onClick: () => {}
+    // };
     constructor() {
         super()
         this.state = {
