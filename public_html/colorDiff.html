@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Color diff</title>
+    <style>
+        .red {
+            border: 1px solid red;
+        }
+        div > div {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <label for="color"> color:
+        <input type="text" name="color" value="#333333"/>
+    </label>
+    <label for="strength">
+        strenght:
+        <input type="number" name="strength" value="5"/>
+    </label>
+    <div>
+    </div>
+    <script>
+        var log = (function () {try {return console.log;}catch (e) {return function () {};}}());
+
+        // created 2016-11-01 - http://codepen.io/stopsopa/pen/wzxpwk
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            log('test')
+
+            function log(l) {try {console.log(l);}catch (e) {}}
+            var color = document.querySelector('[name="color"]');
+            var strength = document.querySelector('[name="strength"]');
+            var div = document.querySelector('div');
+
+            function hexToInt(hex) {
+                hex = hex.replace(/^#(.*)$/, '$1');
+                if (!/^[a-f0-9]{6}$/i.test(hex)) {
+                    throw 'wrong format: '+hex;
+                }
+                return [
+                    parseInt(hex[0]+hex[1], 16),
+                    parseInt(hex[2]+hex[3], 16),
+                    parseInt(hex[4]+hex[5], 16)
+                ];
+            }
+            function intToHex(bucket) {
+                var i = '';
+                bucket.forEach(function (c) {
+                    i += c.toString(16);
+                });
+                return i;
+            }
+            function moveColor(c, delta) {
+                c = hexToInt(c);
+                return c.map(function (i) {
+                    var e = Math.floor(Math.random() * delta) + i;
+                    if (e > 255) {
+                        return 255;
+                    }
+                    if (e < 0) {
+                        return 0;
+                    }
+                    return e;
+                });
+            }
+
+            function trigger () {
+                var c = color.value;
+                var s = strength.value;
+                if (!/^#[0-9a-f]{6}$/i.test(c)) {
+                    throw "wrong format ";
+                }
+                var e = '';
+                for (var i = 0 ; i < 10 ; i += 1 ) {
+                    e += '<div style="background-color: #'+intToHex(moveColor(c, s))+';"></div>';
+                }
+                div.innerHTML = e;
+
+            }
+            color.addEventListener('keyup', function () {
+                if (/^#[0-9a-f]{6}$/i.test(color.value)) {
+                    color.classList.remove('red');
+                    trigger();
+                }
+                else {
+                    color.classList.add('red');
+                }
+            })
+            strength.addEventListener('change', function () {
+                if (strength.value < 0) {
+                    strength.value = 0;
+                }
+                trigger();
+            });
+            trigger();
+
+        });
+    </script>
+</body>
+</html>

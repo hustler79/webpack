@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Equilateral triangle</title>
+    <style>
+        .tr {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 112.5px 194.9px 112.5px;
+            border-color: red green #007bff yellow;
+
+        }
+        [type="range"] {
+            width: 500px;
+        }
+    </style>
+
+</head>
+<body>
+    Equilateral triangle
+
+    <input id="test" type="range"/>
+    <div class="tr"></div>
+
+    <script>
+        var log = (function () {try {return console.log;}catch (e) {return function () {};}}());
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // http://codepen.io/stopsopa/pen/rrAmZJ
+
+            // trygonometry: http://i.imgur.com/P2PXIIV.png
+
+            var slider = document.querySelector('[type="range"]');
+            var tr = document.querySelector('.tr');
+
+
+            function angToRad(ang) {
+                return ang * (Math.PI / 180);
+            }
+
+            slider.addEventListener('change', function () {
+                var s = slider.value;
+                var width = (500 / 100) * s;
+
+                var halfW = width / 2;
+
+                // http://www.mathwarehouse.com/trigonometry/sine-cosine-tangent-practice3.php
+                var height = Math.tan(angToRad(60)) * halfW;
+
+                tr.style.borderWidth = '0 '+halfW+'px '+height+'px '+halfW+'px';
+            });
+
+        });
+    </script>
+</body>
+</html>
