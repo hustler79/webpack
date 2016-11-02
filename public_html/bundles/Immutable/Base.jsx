@@ -1,6 +1,8 @@
 'use strict';
 
 import React from 'react';
+import update from 'update';
+import {autobind} from 'core-decorators';
 
 import Node from 'immutable/Node';
 
@@ -19,16 +21,6 @@ export default class Base extends React.Component {
                         l011 : {},
                         l012 : {},
                         l013 : {},
-                    },
-                    l02: {
-                        l021 : {},
-                        l022 : {},
-                        l023 : {},
-                    },
-                    l03: {
-                        l031 : {},
-                        l032 : {},
-                        l033 : {},
                     }
                 },
                 l1: {
@@ -40,19 +32,30 @@ export default class Base extends React.Component {
                     },
                     l12: {},
                     l13: {},
-                },
-                l2: {
-                    l20: {},
-                    l21: {},
-                    l22: {},
-                    l23: {},
                 }
             }
         };
     }
+    @autobind
+    onClickl033() {
+        log('onClickl033');
+        const newData = update(this.state.data, {
+            l0: {
+                l01: {
+                    l013: {$set: {cos: 'innego'}}
+                }
+            }
+        });
+        log({data: newData});
+        this.setState({data: newData}, function () {
+            log('after')
+            log(this.state)
+        });
+    }
     render() {
         return (
-            <div>base
+            <div>
+                <button onClick={this.onClickl033}>to l033</button>
                 <Node data={this.state.data} />
             </div>
         );

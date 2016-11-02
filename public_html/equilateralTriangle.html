@@ -31,6 +31,7 @@
         var log = (function () {try {return console.log;}catch (e) {return function () {};}}());
 
         var rangeOnChange = {
+            // slider.addEventListener('input', function () {
             bind: function (rng, callback) {
                 callback = callback.bind(rng)
                 var listener = function() {
@@ -73,6 +74,7 @@
                 return ang * (Math.PI / 180);
             }
 
+//            slider.addEventListener('input', function () {
             rangeOnChange.bind(slider, function () {
                 var s = slider.value;
                 var width = (500 / 100) * s;
