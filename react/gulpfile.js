@@ -27,10 +27,10 @@ gulp.task("scss", function () {
         // functions: sassFunctions()
     }
 
-    return gulp.src(utils.con('js.entries'))
+    return gulp.src(utils.con('scss.entries'))
         .pipe(sourcemaps.init())
         .pipe(sass(cnf)
-            // .on('error', sass.logError)
+            .on('error', sass.logError)
         )
         .on('error', swallowError)
         .pipe(sourcemaps.write('.', { // https://github.com/floridoo/gulp-sourcemaps#write-options
