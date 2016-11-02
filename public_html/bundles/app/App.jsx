@@ -95,9 +95,9 @@ export default class App extends React.Component {
             });
         });
     }
-    shouldComponentUpdate() {
+    // shouldComponentUpdate() {
         // https://github.com/seansfkelley/pure-render-decorator/commit/137f8a3c6999aba4688f81ad6c9f4b9f0a180de1
-    }
+    // }
     // @autobind
     render() {
 
