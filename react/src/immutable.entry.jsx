@@ -7,5 +7,3 @@ import 'Immutable/imm.scss';
 import Base from 'Immutable/Base';
 
 render(<Base />, document.getElementById('app'));
-
-
