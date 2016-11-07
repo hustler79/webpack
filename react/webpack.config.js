@@ -2,6 +2,7 @@ const path      = require("path");
 const webpack   = require('webpack');
 const glob      = require("glob");
 const utils     = require("./webpack/utils");
+const param     = require('jquery-param');
 
 var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChunkPlugin");
 // var ExtractTextPlugin = require("extract-text-webpack-plugin");
@@ -35,11 +36,12 @@ module.exports = {
             minChunks: 2
         }),
         // https://webpack.github.io/docs/list-of-plugins.html#provideplugin
-        new webpack.ProvidePlugin(utils.con('provide'))
+        new webpack.ProvidePlugin(utils.con('provide')),
         // new webpack.SourceMapDevToolPlugin({
         //     filename: '[file].map',
         //     // exclude: ['vendors.js']
         // }),
+        // new webpack.HotModuleReplacementPlugin()
     ].concat( (env === 'prod') ? [
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
