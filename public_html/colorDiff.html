@@ -24,7 +24,8 @@
     </label>
     <label for="strength">
         strenght:
-        <input type="number" name="strength" value="5"/>
+        <input type="range" name="strength" value="5"/>
+        <span></span>
     </label>
     <div>
     </div>
@@ -32,14 +33,42 @@
         var log = (function () {try {return console.log;}catch (e) {return function () {};}}());
 
         // created 2016-11-01 - http://codepen.io/stopsopa/pen/wzxpwk
+
+        var rangeOnChange = {
+            bind: function (rng, callback) {
+                callback = callback.bind(rng)
+                var listener = function() {
+                    window.requestAnimationFrame(callback);
+                };
+                var events = {
+                    mousedown: function() {
+                        listener();
+                        rng.addEventListener("mousemove", listener);
+                    },
+                    mouseup: function() {
+                        rng.removeEventListener("mousemove", listener);
+                    },
+                    listener: listener
+                };
+
+                rng.addEventListener("mousedown", events.mousedown);
+                rng.addEventListener("mouseup", events.mouseup);
+
+                return events;
+            },
+            unbind: function (rng, events) {
+                rng.removeEventListener("mousedown", events.mousedown);
+                rng.removeEventListener("mouseup", events.mouseup);
+                rng.removeEventListener("mousemove", events.listener);
+                return this;
+            }
+        };
         
         document.addEventListener('DOMContentLoaded', function () {
-            log('test')
-
-            function log(l) {try {console.log(l);}catch (e) {}}
             var color = document.querySelector('[name="color"]');
             var strength = document.querySelector('[name="strength"]');
             var div = document.querySelector('div');
+            var span = document.querySelector('span');
 
             function hexToInt(hex) {
                 hex = hex.replace(/^#(.*)$/, '$1');
@@ -84,7 +113,7 @@
                     e += '<div style="background-color: #'+intToHex(moveColor(c, s))+';"></div>';
                 }
                 div.innerHTML = e;
-
+                span.innerHTML = s;
             }
             color.addEventListener('keyup', function () {
                 if (/^#[0-9a-f]{6}$/i.test(color.value)) {
@@ -95,12 +124,7 @@
                     color.classList.add('red');
                 }
             })
-            strength.addEventListener('change', function () {
-                if (strength.value < 0) {
-                    strength.value = 0;
-                }
-                trigger();
-            });
+            rangeOnChange.bind(strength, trigger)
             trigger();
 
         });
