@@ -2,3 +2,11 @@ https://www.lynda.com/CSS-tutorials/Make-SVG-background-images-backward-compatib
 
 https://jakearchibald.github.io/svgomg/
 https://jakearchibald.com/2013/animated-line-drawing-svg/
+Compatability:
+    http://caniuse.com/#search=svg
+
+
+
+
+
+

@@ -9,6 +9,11 @@ var path = require("path"),
 
 var env = utils.setup(path.resolve('./config.js'));
 
+function swallowError (error) {
+    console.log(error.toString());
+    this.emit('end')
+}
+
 gulp.task("scss", function () {
 
     var cnf = {
@@ -22,9 +27,12 @@ gulp.task("scss", function () {
         // functions: sassFunctions()
     }
 
-    return gulp.src(utils.con('js.entries'))
+    return gulp.src(utils.con('scss.entries'))
         .pipe(sourcemaps.init())
-        .pipe(sass(cnf).on('error', sass.logError))
+        .pipe(sass(cnf)
+            .on('error', sass.logError)
+        )
+        .on('error', swallowError)
         .pipe(sourcemaps.write('.', { // https://github.com/floridoo/gulp-sourcemaps#write-options
             addComment: true,
             debug: true,
@@ -37,6 +45,7 @@ gulp.task("scss", function () {
 gulp.task('default', function() {
     return gulp.src('')
         .pipe(webpack(config))
+        .on('error', swallowError)
         .pipe(gulp.dest(config.output.path))
     ;
 });
