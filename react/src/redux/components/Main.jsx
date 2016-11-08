@@ -8,7 +8,8 @@ export default class Main extends React.Component {
         return (
             <div>
                 <h1>
-                    <Link to="/redux/001/index.php">Reduxstagram</Link>
+                    {/*<Link to="/redux/001/index.php">Reduxstagram</Link>*/}
+                    <Link to="/">Reduxstagram</Link>
                 </h1>
                 <ul>
                     <li><Link to="/redux/001/view/1">page1</Link></li>

@@ -3,7 +3,7 @@ oraz
 http://webpack.github.io/docs/tutorials/getting-started/
 
 npm install -g yarn
-yarn install
+yarn --ignore-optional
 
 npm run prod        -- production mode (don't uglify and don't generate sourcefiles)
 webpack             -- run without gulp (faster version of 'npm run prod'
