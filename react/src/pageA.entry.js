@@ -7,7 +7,7 @@ common();
 console.log(config);
 
 
-var log = require('log').default;
+var log = require('log');
 console.log(log)
 
 log('test log');

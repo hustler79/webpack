@@ -118,8 +118,8 @@
         }
 
         class Game extends React.Component {
-            constructor() {
-                super();
+            constructor(...args) {
+                super(...args);
                 this.state = {
                     history: [Array(9).fill(null)],
                     stepNumber: 0,

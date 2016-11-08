@@ -18,8 +18,8 @@ export default class Qf extends React.Component {
     // static defaultProps = {
     //     onClick: () => {}
     // };
-    constructor() {
-        super()
+    constructor(...args) {
+        super(...args);
         this.state = {
             a: 26,
             b: 18,

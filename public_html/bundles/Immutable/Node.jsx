@@ -3,10 +3,12 @@
 import React from 'react';
 import isObject from 'lodash/isObject';
 import shallowCompare from 'react-addons-shallow-compare';
-import shallowEqual from 'fbjs/lib/shallowEqual';
 import {autobind} from 'core-decorators';
 
-export default class Node extends React.Component {
+// https://facebook.github.io/react/docs/react-api.html#react.purecomponent
+// good article about: http://benchling.engineering/performance-engineering-with-react/
+// yarn add react-addons-shallow-compare
+export default class Node extends React.PureComponent {
     constructor(props) {
         super(props)
         this.state = {
@@ -14,21 +16,23 @@ export default class Node extends React.Component {
         };
     }
     // @autobind
-    shouldComponentUpdate(nextProps, nextState) {
-        // return this.props.data !== nextProps.data;
-        switch (window.mode) {
-            case 0:
-                // default logic: https://github.com/seansfkelley/pure-render-decorator/commit/137f8a3c6999aba4688f81ad6c9f4b9f0a180de1
-                return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
-                break;
-            case 1:
-                return shallowCompare(this, nextProps, nextState);
-                break;
-            case 2:
-                return !this.state || this.props.data !== nextProps.data || this.state !== nextState;
-                break;
-        }
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     return shallowCompare(this, nextProps, nextState);
+    //
+    //     // all below is wrong ...
+    //     // switch (window.mode) {
+    //     //     case 0:
+    //     //         // default logic: https://github.com/seansfkelley/pure-render-decorator/commit/137f8a3c6999aba4688f81ad6c9f4b9f0a180de1
+    //     //         return !shallowEqual(this.props, nextProps) || !shallowEqual(this.state, nextState);
+    //     //         break;
+    //     //     case 1:
+    //     //         return shallowCompare(this, nextProps, nextState);
+    //     //         break;
+    //     //     case 2:
+    //     //         return !this.state || this.props.data !== nextProps.data || this.state !== nextState;
+    //     //         break;
+    //     // }
+    // }
     render() {
 
         var data = this.props.data;

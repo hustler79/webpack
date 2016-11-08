@@ -9,8 +9,8 @@ import { autobind } from 'core-decorators';
 log(CreateInstance);
 
 export default class App extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(...args) {
+        super(...args);
 
         this.state = {
             input: '',

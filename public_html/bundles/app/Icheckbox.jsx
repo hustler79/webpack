@@ -8,8 +8,8 @@ export default class Icheckbox extends React.Component {
     static PropTypes = {
         label: React.PropTypes.string.isRequired
     };
-    constructor(props) {
-        super(props);
+    constructor(...args) {
+        super(...args);
     }
     render() {
         let {label} = this.props;

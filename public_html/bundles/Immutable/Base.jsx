@@ -7,6 +7,12 @@ import {autobind} from 'core-decorators';
 import Node from 'immutable/Node';
 import deepcopy from "deepcopy";
 
+// https://facebook.github.io/react/docs/perf.html
+import Perf from 'react-addons-perf';
+
+// firefox error
+console.table = console.log;
+
 let iterator = 0;
 window.mode = 0;
 
@@ -17,8 +23,8 @@ const modes = {
 };
 
 export default class Base extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor(...args) {
+        super(...args);
         this.state = {
             mode: 0,
             data: {
@@ -53,7 +59,13 @@ export default class Base extends React.Component {
                 }
             }
         });
+        /// https://gist.github.com/badsyntax/4f8ed3fca9fffa921596/
+        // Perf.start();
         this.setState({data: newData});
+        // Perf.stop();
+        // const t = Perf.getLastMeasurements();
+        // Perf.printInclusive(t);
+        // Perf.printWasted(t);
     }
     @autobind
     onClickl111() {
