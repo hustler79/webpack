@@ -111,6 +111,7 @@
                 };
             },
             componentDidMount() {
+
                 document.querySelector('title').innerHTML = 'Google test - ajax page - changed by innerHTML';
 
                 var that = this;
