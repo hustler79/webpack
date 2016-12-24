@@ -1,9 +1,11 @@
 const path      = require("path");
 
+const web = '../public_html'
+
 module.exports = {
     roots: [ // where to search by require
         path.resolve('src'),
-        path.resolve('../public_html/bundles')
+        path.resolve(web + '/bundles')
     ],
     alias: {
         // 'log': path.join(__dirname, 'webpack', 'log'),
@@ -21,19 +23,18 @@ module.exports = {
         log: 'log'
     },
 
-
     js: {
         entries: [ // looks for *.entry.{js|jsx} - watch only on files *.entry.{js|jsx}
             path.resolve('./src'),
             // ...
         ],
-        output: path.resolve("../public_html/js")
+        output: path.resolve(web + '/js')
     },
     scss: {
         entries: [ // only this scss files will be transformed to css
             path.resolve('./src/scss/**/*.scss')
             // ...
         ],
-        output: path.resolve("../public_html/css")
+        output: path.resolve(web + '/css')
     }
 }
