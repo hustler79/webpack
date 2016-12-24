@@ -1,6 +1,6 @@
 'use strict';
 
-import 'scss/react.scss';
+import 'scss/css.scss';
 import 'css/icontrol_big_gray.css';
 import React from 'react';
 import ReactDOM from 'react-dom';

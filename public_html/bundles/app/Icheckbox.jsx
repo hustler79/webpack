@@ -15,9 +15,10 @@ export default class Icheckbox extends React.Component {
         let {label} = this.props;
         return (
             <label className="icontrol" {...this.props}>
-                <input type="checkbox"
-                       checked={this.props.checked}
-                       onChange={this.props.onChange}
+                <input
+                    type="checkbox"
+                    checked={this.props.checked}
+                    onChange={this.props.onChange}
                 />
                 <span className="fake"></span>
                 {label}

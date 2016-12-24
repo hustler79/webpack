@@ -1,12 +1,10 @@
 'use strict';
 
 import React from 'react';
-import ajax from 'lib/ajax';
+import {ajax} from 'lib/ajax';
 import Icheckbox from 'app/Icheckbox';
 import CreateInstance from 'app/CreateInstance';
 import { autobind } from 'core-decorators';
-
-log(CreateInstance);
 
 export default class App extends React.Component {
     constructor(...args) {
@@ -42,19 +40,16 @@ export default class App extends React.Component {
     }
     @autobind
     onChangeCheckbox(e) {
-        log('onChangeCheckbox')
         this.setState({checkbox: e.target.checked});
     }
     @autobind
     onChangeWithoutCheckbox(e) {
-        log('onChangeWithoutCheckbox')
         this.setState((prevState, props) => ({
             withoutcheckbox: !prevState.withoutcheckbox
         }));
     }
     // @autobind
     onChangeComponent(e) {
-        log('onChangeComponent not bound')
         this.setState({checkboxcomponent: e.target.checked});
     }
     @autobind
@@ -100,9 +95,6 @@ export default class App extends React.Component {
     // }
     // @autobind
     render() {
-
-        log('render', this.state);
-
         return (
             <form onSubmit={this.onSubmit}>
                 <h3>Simple form</h3>
