@@ -1,6 +1,6 @@
 const path      = require("path");
 
-const web = '../public_html'
+const web = '../public_html';
 
 module.exports = {
     roots: [ // where to search by require
