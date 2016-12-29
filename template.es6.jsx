@@ -2,18 +2,16 @@
 
 import React from 'react';
 import { autobind } from 'core-decorators';
+import trim from 'lodash/trim';
+
+// material-ui
+//   icons: https://material.io/icons/
 
 export default class Sandbox extends React.Component {
     // https:1//facebook.github.io/react/docs/typechecking-with-proptypes.html
     static PropTypes = {
         input: React.PropTypes.string.isRequired
     };
-    @autobind
-    onChange(e) {
-        this.setState({
-            input: e.target.value
-        });
-    }
     constructor(...args) {
         super(...args);
 
@@ -21,10 +19,20 @@ export default class Sandbox extends React.Component {
             input: '',
         };
     }
+    @autobind
+    onChange(e) {
+        this.setState((prevState, props) => ({
+            input: !prevState.input
+        }), () => {
+            log('logic after state change')
+        });
+    }
+    onFetch(method, e) {
+    }
     render() {
         return (
             <form onSubmit={this.onSubmit}>
-                <label >
+                <label>
                     <input type="text" value={this.state.input} onChange={this.onChange} />
                 </label>
 
@@ -36,6 +44,7 @@ export default class Sandbox extends React.Component {
                     var item = this.state.list[i];
                     return <div key={i}>{item.name}</div>
                 })}
+                <button onClick={this.onFetch.bind(this, 'json')}></button>
             </form>
         );
     }

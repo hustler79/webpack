@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>001 flux</title>
+    <style>
+        .fc {
+            border:  1px solid gray;
+            padding: 1px;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: row;  /* row|row-reverse|column|column-reverse */
+            -ms-flex-direction: row;
+            flex-direction: row;
+
+            /*-webkit-flex-wrap: wrap-reverse;*/
+            /*-ms-flex-wrap: wrap-reverse;*/
+            /*flex-wrap: wrap-reverse;*/
+
+            /*width: 1000px;*/
+        }
+        .flex1 {
+            -webkit-flex: 2 1 0;
+            -ms-flex: 2 1 0;
+            flex: 2 1 0;
+        }
+        .flex2 {
+            -webkit-flex: 4;
+            -ms-flex: 4;
+            flex: 4;
+        }
+        .box {
+            margin: 1px;
+            background-color: lightgray;
+            padding: 3px;
+        }
+
+    </style>
+</head>
+<body>
+    <p>main axis - cross axis</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam scelerisque placerat est, eget lobortis nulla venenatis non. Mauris ligula nibh, faucibus id magna a, posuere vehicula neque. Proin vel arcu lacinia erat sagittis sagittis. Mauris arcu neque, vestibulum quis sagittis id, ullamcorper ut ex. Ut molestie vestibulum odio eget volutpat. Nam ac dolor sed velit blandit facilisis in sit amet neque. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Praesent et justo in lorem lobortis varius id ut risus. Pellentesque odio lorem, molestie quis libero id, ultrices elementum libero. Phasellus quis dui id lorem efficitur commodo ac aliquam sapien. Duis id est non nunc interdum consequat quis et metus. Phasellus eget sem arcu.</p>
+
+    <div class="fc">
+        <div class="box flex1" contenteditable>contenteditable</div>
+        <div class="box flex1" contenteditable>contenteditable</div>
+        <div class="box flex2" contenteditable>contenteditable</div>
+        <div class="box flex1" contenteditable>contenteditable</div>
+        <!--<div class="box">six</div>-->
+        <!--<div class="box">seven</div>-->
+        <!--<div class="box">eight</div>-->
+        <!--<div class="box">nine</div>-->
+    </div>
+    <p>Phasellus fermentum libero eget dui blandit posuere. Curabitur vehicula, tortor consequat scelerisque placerat, diam tortor gravida ipsum, eu cursus urna neque vitae diam. Proin id ligula augue. Integer ac sollicitudin neque. Sed augue lacus, dictum id interdum quis, feugiat nec lacus. Duis aliquam, justo vitae ultricies dignissim, nisl urna volutpat sapien, nec efficitur ipsum lorem faucibus dui. Sed luctus, elit lacinia semper consequat, mauris elit euismod magna, vitae semper dolor nulla a urna. Aliquam quis orci porta, efficitur libero quis, rhoncus risus. Sed ut nunc massa. Praesent interdum lacinia ultricies.</p>
+</body>
+</html>
