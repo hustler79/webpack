@@ -3,7 +3,7 @@
 import React from 'react';
 import { autobind } from 'core-decorators';
 import trim from 'lodash/trim';
-import namespaces from 'namespaces';
+import classnames from 'classnames';
 
 // material-ui
 //   icons: https://material.io/icons/
