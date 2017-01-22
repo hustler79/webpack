@@ -9,6 +9,7 @@ import classnames from 'classnames';
 //   icons: https://material.io/icons/
 
 export default class Sandbox extends React.Component {
+    MAX_RANGE = 100
     // https:1//facebook.github.io/react/docs/typechecking-with-proptypes.html
     static PropTypes = {
         input: React.PropTypes.string.isRequired
