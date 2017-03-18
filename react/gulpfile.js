@@ -20,7 +20,7 @@ gulp.task("scss", function () {
         outputStyle: 'compressed'
     };
 
-    if (utils.env() === 'prod') {
+    if (process.env.WEBPACK_MODE === 'prod') {
         cnf.errLogToConsole = true;
         // sourceMapEmbed: true,
         // sourceComments: true
