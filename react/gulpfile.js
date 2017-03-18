@@ -50,11 +50,11 @@ gulp.task('default', function() {
     ;
 });
 
-gulp.task('prod', ['scss', 'default']);
+gulp.task('rebuild', ['scss', 'default']);
 
-gulp.task('watch', ['prod'], function () {
+gulp.task('watch', ['rebuild'], function () {
     utils.con('roots').forEach(function (p) {
-        gulp.watch([p + '/**/*.{js,jsx,css,scss}'], ['prod']);
+        gulp.watch([p + '/**/*.{js,jsx,css,scss}'], ['rebuild']);
     });
 
     var entry = utils.con('js.entries');
@@ -64,7 +64,7 @@ gulp.task('watch', ['prod'], function () {
     }
 
     entry.forEach(function (p) {
-        gulp.watch([p + '/**/*.entry.{js,jsx}'], ['prod']);
+        gulp.watch([p + '/**/*.entry.{js,jsx}'], ['rebuild']);
     });
 });
 
