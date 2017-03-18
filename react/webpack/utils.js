@@ -32,7 +32,8 @@ module.exports = {
             this.config = require(setup);
         }
 
-        var env = this.env();
+        //var env = this.env();
+        var env = process.env.WEBPACK_MODE;
 
         console.log('env: '.yellow + env.red + "\n");
 
