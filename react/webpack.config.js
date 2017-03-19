@@ -7,7 +7,7 @@ const param     = require('jquery-param');
 var CommonsChunkPlugin = require("./node_modules/webpack/lib/optimize/CommonsChunkPlugin");
 // var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var env = utils.setup(path.resolve('./config.js'));
+utils.setup(path.resolve('./config.js'));
 
 var alias = utils.con('alias');
 
@@ -37,22 +37,22 @@ module.exports = {
         //     // exclude: ['vendors.js']
         // }),
         // new webpack.HotModuleReplacementPlugin()
-    ].concat( (env === 'prod') ? [
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false,
-            },
-            output: {
-                comments: false,
-            },
-        }),
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify('production')
-            }
-        })
-    ] : []),
+    ].concat( (process.env.WEBPACK_MODE === 'prod') ? [
+            new webpack.optimize.UglifyJsPlugin({
+                sourceMap: true,
+                compress: {
+                    warnings: false,
+                },
+                output: {
+                    comments: false,
+                },
+            }),
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'NODE_ENV': JSON.stringify('production')
+                }
+            })
+        ] : []),
     resolveLoader: {
         modulesDirectories: [
             "web_loaders", "web_modules", "node_loaders", "node_modules",
@@ -124,7 +124,7 @@ module.exports = {
                 // ],
                 exclude: [
                     path.join(__dirname, 'node_modules'),
-                //     // path.join(__dirname, 'js')
+                    //     // path.join(__dirname, 'js')
                 ]
             },
             {
@@ -134,14 +134,14 @@ module.exports = {
         ]
     },
 
-        // http://cheng.logdown.com/posts/2016/03/25/679045
-        // https://webpack.github.io/docs/configuration.html#devtool
+    // http://cheng.logdown.com/posts/2016/03/25/679045
+    // https://webpack.github.io/docs/configuration.html#devtool
 
-        // off - [aby użyć tego trzeba zakomentować całą sekcję new webpack.SourceMapDevToolPlugin({ ]
-    devtool: (env === 'dev') ? false : 'source-map', // full source map (podobno wolne)
+    // off - [aby użyć tego trzeba zakomentować całą sekcję new webpack.SourceMapDevToolPlugin({ ]
+    devtool: (process.env.WEBPACK_MODE === 'dev') ? false : 'source-map', // full source map (podobno wolne)
     // devtool: "cheap-source-map", // nieczytelne
 
-        // on - [te używamy z włączoną sekcją new webpack.SourceMapDevToolPlugin({ ]
+    // on - [te używamy z włączoną sekcją new webpack.SourceMapDevToolPlugin({ ]
     // devtool: "cheap-module-source-map", // for prod
     // devtool: "cheap-module-eval-source-map", // for dev - nieczytelne
     // devtool: "cheap-module-source-map", // for dev - nie widać kodu w ogóle w zakładce debug w ff
