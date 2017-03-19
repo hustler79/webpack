@@ -7,7 +7,7 @@ var path = require("path"),
     sourcemaps = require('gulp-sourcemaps')
 ;
 
-var env = utils.setup(path.resolve('./config.js'));
+utils.setup(path.resolve('./config.js'));
 
 function swallowError (error) {
     console.log(error.toString());
