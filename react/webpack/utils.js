@@ -4,10 +4,9 @@ var colors    = require('colors');
 
 function findentries(root) {
     const list = glob.sync(root + "/**/*.entry.{js,jsx}");
-    const listLength = list.length;
     let tmp, entries = {};
 
-    for (let i = 0; i < listLength; i++) {
+    for (let i = 0, l = list.length; i < l; i++) {
         tmp = path.parse(list[i]);
         tmp = path.basename(tmp.name, path.extname(tmp.name));
         entries[tmp] = list[i];
