@@ -3,41 +3,24 @@ var path      = require("path");
 var colors    = require('colors');
 
 function findentries(root) {
-    // https://github.com/dylansmith/node-pathinfo/blob/master/index.js
-    // http://php.net/manual/en/function.pathinfo.php#refsect1-function.pathinfo-examples
+    const list = glob.sync(root + "/**/*.entry.{js,jsx}");
+    const listLength = list.length;
+    let tmp, entries = {};
 
-    var list = glob.sync(root+'/**/*.entry.{js,jsx}');
-
-    var t, tmp = {};
-
-    for (var i = 0, l = list.length ; i < l ; i += 1 ) {
-
-        t = list[i];
-
-        t = path.basename(t, path.extname(t));
-
-        t = path.basename(t, path.extname(t));
-
-        tmp[t] = list[i];
+    for (let i = 0; i < listLength; i++) {
+        tmp = path.parse(list[i]);
+        tmp = path.basename(tmp.name, path.extname(tmp.name));
+        entries[tmp] = list[i];
     }
-
-    return tmp;
+    return entries;
 }
 
 module.exports = {
     config: false,
     setup: function (setup) {
-
         if (setup && !this.config) {
             this.config = require(setup);
         }
-
-        //var env = this.env();
-        var env = process.env.WEBPACK_MODE;
-
-        console.log('env: '.yellow + env.red + "\n");
-
-        return env;
     },
     entry: function () {
 
